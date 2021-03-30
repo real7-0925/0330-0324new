@@ -100,10 +100,10 @@
              Amplify.addPlugin(new AWSCognitoAuthPlugin());//without credential log in
              Amplify.addPlugin(new AWSPredictionsPlugin());//rekognition translate polly high level client
 
-//            AmplifyConfiguration config = AmplifyConfiguration.builder(getApplicationContext())
-//                    .devMenuEnabled(false)
-//                    .build();
-//            Amplify.configure(config, getApplicationContext());
+            AmplifyConfiguration config = AmplifyConfiguration.builder(getApplicationContext())
+                    .devMenuEnabled(false)
+                    .build();
+            Amplify.configure(config, getApplicationContext());
          } catch (AmplifyException e) {
              Log.e("Tutorial", "Could not initialize Amplify", e);
          }
@@ -203,7 +203,7 @@
                  Bitmap image = BitmapFactory.decodeFile(String.valueOf(imageFile), bmOptions);
                  DetectEntities(image);
              } catch (Exception e) {
-                 Log.e("DETECT", "detect error");
+                 Log.e("DETECT", "detect error" + e.getMessage());
              }
              //}
          }
@@ -219,21 +219,14 @@
                      image,
                      result -> {
                          LabelDataHold((IdentifyEntitiesResult) result,image);
-                         //IdentifyEntityMatchesResult identifyResult = (IdentifyEntityMatchesResult) result;
-                         //EntityMatch match = identifyResult.getEntityMatches().get(0);
-                         //Log.i("AmplifyQuickstart", match.getExternalImageId());
-
-//                         IdentifyEntitiesResult identifyResult = (IdentifyEntitiesResult) result;
-//                         EntityDetails metadata = identifyResult.getEntities().get(0);
-//                         Log.i("MyAmplifyApp", metadata.getBox().toShortString());
 
                      },
-                     error -> Log.e("AmplifyQuickstart", "Identify failed", error)
+                     error -> Log.e("AmplifyQuickstart", "Identify failed " + error.getMessage())
              );
              Log.i("DETECTENTITIES", "finished");
 
          } catch (Exception e) {
-             Log.e("DETECT", "DetectEntities error");
+             Log.e("DETECT", "DetectEntities error " + e.getMessage());
          }
      }
 
