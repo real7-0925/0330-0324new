@@ -33,6 +33,5 @@
     "s3PublicPolicy": "Public_policy_dc2e026e",
     "s3ReadPolicy": "read_policy_dc2e026e",
     "s3UploadsPolicy": "Uploads_policy_dc2e026e",
-    "adminTriggerFunction": "RekognitionIndexFacesTrigger4171301e",
     "triggerFunction": "NONE"
 }

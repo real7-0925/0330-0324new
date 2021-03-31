@@ -36,41 +36,14 @@
     "s3f5566bc5": {
       "providerPlugin": "awscloudformation",
       "service": "S3",
-      "dependsOn": [
-        {
-          "category": "function",
-          "resourceName": "RekognitionIndexFacesTrigger4171301e",
-          "attributes": [
-            "Name",
-            "Arn",
-            "LambdaExecutionRole"
-          ]
-        }
-      ]
+      "dependsOn": []
     }
   },
   "predictions": {
     "0324new": {
       "providerPlugin": "awscloudformation",
       "service": "Rekognition",
-      "dependsOn": [
-        {
-          "category": "function",
-          "resourceName": "RekognitionIndexFacesTrigger4171301e",
-          "attributes": [
-            "Name",
-            "Arn",
-            "LambdaExecutionRole"
-          ]
-        },
-        {
-          "category": "storage",
-          "resourceName": "s3f5566bc5",
-          "attributes": [
-            "BucketName"
-          ]
-        }
-      ],
+      "dependsOn": [],
       "identifyType": "identifyEntities"
     }
   }

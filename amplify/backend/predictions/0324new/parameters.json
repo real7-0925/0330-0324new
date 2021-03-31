@@ -10,9 +10,9 @@
     "adminAuthProtected": "ALLOW",
     "adminGuestProtected": "ALLOW",
     "identifyType": "identifyEntities",
-    "celebrityDetectionEnabled": true,
-    "adminTask": true,
-    "maxEntities": 10,
-    "folderPolicies": "app",
+    "celebrityDetectionEnabled": false,
+    "adminTask": false,
+    "maxEntities": 0,
+    "folderPolicies": "",
     "access": "authAndGuest"
 }
