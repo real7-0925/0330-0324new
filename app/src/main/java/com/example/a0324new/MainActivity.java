@@ -100,10 +100,10 @@
              Amplify.addPlugin(new AWSCognitoAuthPlugin());//without credential log in
              Amplify.addPlugin(new AWSPredictionsPlugin());//rekognition translate polly high level client
 
-            AmplifyConfiguration config = AmplifyConfiguration.builder(getApplicationContext())
-                    .devMenuEnabled(false)
-                    .build();
-            Amplify.configure(config, getApplicationContext());
+             AmplifyConfiguration config = AmplifyConfiguration.builder(getApplicationContext())
+                     .devMenuEnabled(false)
+                     .build();
+             Amplify.configure(config, getApplicationContext());
          } catch (AmplifyException e) {
              Log.e("Tutorial", "Could not initialize Amplify", e);
          }
@@ -130,7 +130,7 @@
          Task task = new Task();
 
          ScheduledThreadPoolExecutor executor = (ScheduledThreadPoolExecutor) Executors.newScheduledThreadPool(0);
-         executor.scheduleWithFixedDelay(task, 1, 10, TimeUnit.SECONDS);
+         executor.scheduleWithFixedDelay(task, 1, 300, TimeUnit.SECONDS);
 
 
      }
@@ -217,16 +217,13 @@
              Amplify.Predictions.identify(
                      IdentifyActionType.DETECT_ENTITIES,
                      image,
-                     result -> {
-                         LabelDataHold((IdentifyEntitiesResult) result,image);
-
-                     },
-                     error -> Log.e("AmplifyQuickstart", "Identify failed " + error.getMessage())
+                     result -> LabelDataHold((IdentifyEntitiesResult) result, image),
+                     error -> Log.e("AmplifyQuickstart", "Identify failed ", error)// + error.getMessage())
              );
              Log.i("DETECTENTITIES", "finished");
 
          } catch (Exception e) {
-             Log.e("DETECT", "DetectEntities error " + e.getMessage());
+             Log.e("DETECT", "DetectEntities error "); //+ e.getMessage());
          }
      }
 
@@ -237,14 +234,33 @@
          int max = result.getEntities().size();
 
          for (int m = 0; m < max; m++) {
-             printout[m] = String.valueOf(result.getEntities().get(m).getEmotions());
-             printout[m] = String.valueOf(result.getEntities().get(m).getBox());
-             printout[m] = String.valueOf(result.getEntities().get(m).getAgeRange());
-             printout[m] = String.valueOf(result.getEntities().get(m).getGender());
-             printout[m] = String.valueOf(result.getEntities().get(m).getLandmarks());
-             printout[m] = String.valueOf(result.getEntities().get(m).getPolygon());
-             printout[m] = String.valueOf(result.getEntities().get(m).getPose());
-             Log.i("result", result.toString());
+             printout[m] = String.valueOf(result.getEntities().get(m).getEmotions().get(m).getValue());
+//             printout[m] = String.valueOf(result.getEntities().get(m).getBox());
+//             printout[m] = String.valueOf(result.getEntities().get(m).getAgeRange());
+//             printout[m] = String.valueOf(result.getEntities().get(m).getGender());
+//             printout[m] = String.valueOf(result.getEntities().get(m).getLandmarks());
+//             printout[m] = String.valueOf(result.getEntities().get(m).getPolygon());
+//             printout[m] = String.valueOf(result.getEntities().get(m).getPose());
+
+
+             //result.getEntities().get(0).getAgeRange().getLow();
+
+             //Log.i("result", result.toString());
+             Log.i("Test Result", printout[m]);
+
+             Log.i("Emotions  Result", result.getEntities().get(m).getEmotions().get(m).getValue()
+                     + ", Confidence: " + result.getEntities().get(m).getEmotions().get(m).getConfidence());
+
+             Log.i("AgeRange  Result", "Age: " + result.getEntities().get(0).getAgeRange().getLow()
+                     + " - " + result.getEntities().get(0).getAgeRange().getHigh());
+
+             Log.i("Gender    Result", result.getEntities().get(0).getGender().getValue()
+                     + ", Confidence: " + result.getEntities().get(0).getGender().getConfidence());
+
+//         Log.i("Try           Result", result.getEntities().get(0).
+//                 + ", Confidence: " + result.getEntities().get(0).getEmotions().get(0).getConfidence());
+
+             //Log.i("Landmarks Result", String.valueOf(result.getEntities().get(0).getLandmarks()));
          }
 
      }
